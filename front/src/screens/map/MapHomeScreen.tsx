@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {Alert, Pressable, StyleSheet, Text, View} from 'react-native';
 import MapView, {
   Callout,
@@ -21,9 +21,10 @@ import usePermission from '@/hooks/usePermission';
 import useGetMarkers from '@/hooks/queries/useGetMarkers';
 import CustomMarker from '@/components/common/CustomMarker';
 import mapStyle from '@/style/mapStyle';
-import {alert, colors, mapNavigation} from '@/constants';
+import {alert, colors, mapNavigation, numbers} from '@/constants';
 import MarkerModal from '@/components/map/MarkerModal';
 import useModal from '@/hooks/useModal';
+import useMoveMapView from '@/hooks/useMoveMapView';
 
 type Navigation = CompositeNavigationProp<
   StackNavigationProp<MapStackParamList>,
@@ -33,21 +34,14 @@ type Navigation = CompositeNavigationProp<
 function MapHomeScreen() {
   const inset = useSafeAreaInsets();
   const navigation = useNavigation<Navigation>();
-  const mapRef = useRef<MapView | null>(null);
   const {userLocation, isUserLocationError} = useUserLocation();
   const [selectLocation, setSelectLocation] = useState<LatLng | null>();
   const [markerId, setMarkerId] = useState<number | null>(null);
   const {data: markers = []} = useGetMarkers({});
   const markerModal = useModal();
-  usePermission('LOCATION');
+  const {mapRef, moveMapView, handleChangeDelta} = useMoveMapView();
 
-  const moveMapView = (coordinate: LatLng) => {
-    mapRef.current?.animateToRegion({
-      ...coordinate,
-      longitudeDelta: 0.0421,
-      latitudeDelta: 0.0922,
-    });
-  };
+  usePermission('LOCATION');
 
   const handlePressMarker = (id: number, coordinate: LatLng) => {
     moveMapView(coordinate);
@@ -94,10 +88,10 @@ function MapHomeScreen() {
         showsMyLocationButton={false}
         customMapStyle={mapStyle}
         onLongPress={handleLongPressMapView}
+        onRegionChangeComplete={handleChangeDelta}
         region={{
           ...userLocation,
-          longitudeDelta: 0.0421,
-          latitudeDelta: 0.0922,
+          ...numbers.INITIAL_DELTA,
         }}>
         {/* 등록한 마커 표시 */}
         {markers.map(({id, color, score, ...coordinate}) => (
