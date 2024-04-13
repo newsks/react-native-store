@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Octicons from 'react-native-vector-icons/Octicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import CustomMarker from './CustomMarker';
+import CustomMarker from '../common/CustomMarker';
 import {getDateWithSeparator} from '@/utils';
 
 interface MarkerModalProps {
@@ -42,8 +42,8 @@ function MarkerModal({markerId, isVisible, hide}: MarkerModalProps) {
                     source={{
                       uri: `${
                         Platform.OS === 'ios'
-                          ? 'http://localhost:3030'
-                          : 'http://192.168.219.104:3030'
+                          ? 'http://localhost:3030/'
+                          : 'http://192.168.219.104:3030/'
                       }${post.images[0]?.uri}`,
                     }}
                     resizeMode="cover"

@@ -3,7 +3,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {Button, Dimensions, Image, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AuthStackParamList} from '@/navigations/stack/AuthStackNavigator';
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import {authNavigation} from '@/constants';
 
 const homeLogo = require('../../assets/matzip.png');

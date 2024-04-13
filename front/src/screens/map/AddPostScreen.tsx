@@ -9,27 +9,28 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import InputField from '@/components/InputField';
+import InputField from '@/components/common/InputField';
 import {colors, mapNavigation} from '@/constants';
 import {MapStackParamList} from '@/navigations/stack/MapStackNavigator';
 import {StackScreenProps} from '@react-navigation/stack';
 
 import Octicons from 'react-native-vector-icons/Octicons';
-import CustomButton from '@/components/CustomButton';
+import CustomButton from '@/components/common/CustomButton';
 import useForm from '@/hooks/useForm';
 import {getDateWithSeparator, validateAddPost} from '@/utils';
-import AddPostHeaderRight from '@/components/AddPostHeaderRight';
+import AddPostHeaderRight from '@/components/post/AddPostHeaderRight';
 import useMutateCreatePost from '@/hooks/queries/useMutateCreatePost';
 import {MarkerColor} from '@/types/domain';
 import useGetAddress from '@/hooks/useGetAddress';
-import MarkerSelector from '@/components/MarkerSelector';
-import ScoreInput from '@/components/ScoreInput';
-import DatePickerOption from '@/components/DatePickerOption';
+import MarkerSelector from '@/components/post/MarkerSelector';
+// import ScoreInput from '@/components/post/ScoreInput';
+import DatePickerOption from '@/components/post/DatePickerOption';
 import useModal from '@/hooks/useModal';
-import ImageInput from '@/components/ImageInput';
+import ImageInput from '@/components/post/ImageInput';
 import usePermission from '@/hooks/usePermission';
 import useImagePicker from '@/hooks/useImagePicker';
-import PreviewImageList from '@/components/PreviewImageList';
+import PreviewImageList from '@/components/common/PreviewImageList';
+import ScoreInput from '@/components/post/ScoreInput';
 
 type AddPostScreenProps = StackScreenProps<
   MapStackParamList,
@@ -151,6 +152,7 @@ function AddPostScreen({route, navigation}: AddPostScreenProps) {
                 imageUris={imagePicker.imageUris}
                 onDelete={imagePicker.delete}
                 onChangeOrder={imagePicker.changeOrder}
+                showOptions
               />
             </View>
           </View>
