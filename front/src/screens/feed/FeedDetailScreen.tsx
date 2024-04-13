@@ -29,6 +29,8 @@ import {CompositeScreenProps} from '@react-navigation/native';
 import {DrawerScreenProps} from '@react-navigation/drawer';
 import {MainDrawerParamList} from '@/navigations/drawer/MainDrawerNavigator';
 import useLocationStore from '@/store/useLocationStore';
+import useModal from '@/hooks/useModal';
+import FeedDetailOption from '@/components/feed/FeedDetailOption';
 
 type FeedDetailScreenProps = CompositeScreenProps<
   StackScreenProps<FeedStackParamList, typeof feedNavigation.FEED_DETAIL>,
@@ -40,6 +42,7 @@ function FeedDetailScreen({route, navigation}: FeedDetailScreenProps) {
   const {data: post, isPending, isError} = useGetPost(id);
   const insets = useSafeAreaInsets();
   const {setMoveLocation} = useLocationStore();
+  const detailOption = useModal();
 
   if (isPending || isError) {
     return <></>;
@@ -69,7 +72,12 @@ function FeedDetailScreen({route, navigation}: FeedDetailScreenProps) {
               color={colors.WHITE}
               onPress={() => navigation.goBack()}
             />
-            <Ionicons name="ellipsis-vertical" size={30} color={colors.WHITE} />
+            <Ionicons
+              name="ellipsis-vertical"
+              size={30}
+              color={colors.WHITE}
+              onPress={detailOption.show}
+            />
           </View>
         </SafeAreaView>
         <View style={styles.imageContainer}>
@@ -160,6 +168,10 @@ function FeedDetailScreen({route, navigation}: FeedDetailScreenProps) {
           />
         </View>
       </View>
+      <FeedDetailOption
+        isVisible={detailOption.isVisible}
+        hideOption={detailOption.hide}
+      />
     </>
   );
 }
