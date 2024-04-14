@@ -7,7 +7,7 @@ import {CompoundOption} from '../common/CompoundOption';
 import useMutateDeletePost from '@/hooks/queries/useMutateDeletePost';
 import useDetailStore from '@/store/useDetailPostStore';
 import {FeedStackParamList} from '@/navigations/stack/FeedStackNavigator';
-import {alert} from '@/constants';
+import {alert, feedNavigation} from '@/constants';
 
 interface FeedDetailOptionProps {
   isVisible: boolean;
@@ -43,6 +43,19 @@ function FeedDetailOption({isVisible, hideOption}: FeedDetailOptionProps) {
       },
     ]);
   };
+
+  const handelEditPost = () => {
+    if (!detailPost) {
+      return;
+    }
+    navigation.navigate(feedNavigation.EDIT_POST, {
+      location: {
+        latitude: detailPost.latitude,
+        longitude: detailPost.longitude,
+      },
+    });
+    hideOption();
+  };
   return (
     <CompoundOption isVisible={isVisible} hideOption={hideOption}>
       <CompoundOption.Background>
@@ -51,7 +64,9 @@ function FeedDetailOption({isVisible, hideOption}: FeedDetailOptionProps) {
             삭제하기
           </CompoundOption.Button>
           <CompoundOption.Divider />
-          <CompoundOption.Button>수정하기</CompoundOption.Button>
+          <CompoundOption.Button onPress={handelEditPost}>
+            수정하기
+          </CompoundOption.Button>
         </CompoundOption.Container>
         <CompoundOption.Container>
           <CompoundOption.Button onPress={hideOption}>
