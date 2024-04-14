@@ -19,6 +19,7 @@ const feedNavigation = {
   FEED_HOME: 'FeedHome',
   FEED_DETAIL: 'FeedDetail',
   EDIT_POST: 'EditPost',
+  IMAGE_ZOOM: 'ImageZoom',
 } as const;
 
 export {mainNavigation, authNavigation, mapNavigation, feedNavigation};

@@ -7,11 +7,13 @@ import FeedHomeHeaderLeft from '@/components/feed/FeedHomeHeaderLeft';
 import FeedDetailScreen from '@/screens/feed/FeedDetailScreen';
 import {LatLng} from 'react-native-maps';
 import EditPostScreen from '@/screens/feed/EditPostScreen';
+import ImageZoomScreen from '@/screens/feed/ImageZoomScreen';
 
 export type FeedStackParamList = {
   [feedNavigation.FEED_HOME]: undefined;
   [feedNavigation.FEED_DETAIL]: {id: number};
   [feedNavigation.EDIT_POST]: {location: LatLng};
+  [feedNavigation.IMAGE_ZOOM]: {index: number};
 };
 
 const Stack = createStackNavigator<FeedStackParamList>();
@@ -56,6 +58,14 @@ function FeedStackNavigator() {
         component={EditPostScreen}
         options={{
           headerTitle: '장소 수정',
+        }}
+      />
+      <Stack.Screen
+        name={feedNavigation.IMAGE_ZOOM}
+        component={ImageZoomScreen}
+        options={{
+          headerTitle: ' ',
+          headerShown: false,
         }}
       />
     </Stack.Navigator>
