@@ -8,13 +8,11 @@ import {colors, mainNavigation} from '@/constants';
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import {Dimensions} from 'react-native';
 import CustomDrawerContent from './CustomDrawerContent';
-import FeedStackNavigator, {
-  FeedStackParamList,
-} from '../stack/FeedStackNavigator';
+import FeedTabNavigator, {FeedTabParamList} from '../tab/FeedTabNavigator';
 
 export type MainDrawerParamList = {
   [mainNavigation.HOME]: NavigatorScreenParams<MapStackParamList>;
-  [mainNavigation.FEED]: NavigatorScreenParams<FeedStackParamList>;
+  [mainNavigation.FEED]: NavigatorScreenParams<FeedTabParamList>;
   [mainNavigation.CALENDAR]: undefined;
 };
 
@@ -76,7 +74,7 @@ function MainDrawerNavigator() {
       />
       <Drawer.Screen
         name={mainNavigation.FEED}
-        component={FeedStackNavigator}
+        component={FeedTabNavigator}
         options={{title: '피드'}}
       />
       <Drawer.Screen

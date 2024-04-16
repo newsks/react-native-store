@@ -9,7 +9,7 @@
 프로젝트 위치에서 명령어를 실행합니다.
 
 ```
-npm install 
+npm install
 ```
 
 2. 환경 변수 설정
@@ -266,13 +266,13 @@ type ResponseSinglePost = ResponsePost & { isFavorite: boolean };
 ResponsePost[];
 ```
 
-#### GET /posts/my/search
+#### GET /posts/my/search?query=검색어&page=1
 
 - query
 
 ```js
 {
-  query: string;
+  query: string; //title 또는 description
   page: number;
 }
 ```
