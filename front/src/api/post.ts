@@ -45,7 +45,29 @@ const updatePost = async ({
   return data;
 };
 
-export {createPost, getPost, getPosts, deletePost, updatePost};
+// 즐겨찾기한 게시물만 불러오는 Api
+const getFavoritePosts = async (page = 1): Promise<ResponsePost[]> => {
+  const {data} = await axiosInstance.get(`/favorites/my?page=${page}`);
+
+  return data;
+};
+
+// 즐겨찾기 추가
+const updateFavoritePost = async (id: number): Promise<number> => {
+  const {data} = await axiosInstance.post(`/favorites/${id}`);
+
+  return data;
+};
+
+export {
+  createPost,
+  getPost,
+  getPosts,
+  deletePost,
+  updatePost,
+  updateFavoritePost,
+  getFavoritePosts,
+};
 export type {
   ResponsePost,
   RequestCreatePost,
