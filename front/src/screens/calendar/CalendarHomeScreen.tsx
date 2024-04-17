@@ -7,13 +7,23 @@ import {SafeAreaView, StyleSheet, Text} from 'react-native';
 function CalendarHomeScreen() {
   const currentMonthYear = getMonthYearDetails(new Date());
   const [monthYear, setMonthYear] = useState(currentMonthYear);
+  const [selectedDate, setSelectedDate] = useState(0);
+
+  const handlePressDate = (date: number) => {
+    setSelectedDate(date);
+  };
 
   const handleUpdateMonth = (increment: number) => {
     setMonthYear(prev => getNewMonthYear(prev, increment));
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Calendar monthYear={monthYear} onChangeMonth={handleUpdateMonth} />
+      <Calendar
+        monthYear={monthYear}
+        onChangeMonth={handleUpdateMonth}
+        selectedDate={selectedDate}
+        onPressDate={handlePressDate}
+      />
     </SafeAreaView>
   );
 }
