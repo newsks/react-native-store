@@ -59,6 +59,24 @@ const updateFavoritePost = async (id: number): Promise<number> => {
   return data;
 };
 
+// 캘린더에 날짜에 해당하는 포스트받기
+type CalendarPost = {
+  id: number;
+  title: string;
+  address: string;
+};
+
+type ResponseCalendarPost = Record<number, CalendarPost[]>;
+
+const getCalendarPosts = async (
+  year: number,
+  month: number,
+): Promise<ResponseCalendarPost> => {
+  const {data} = await axiosInstance.get(`/posts?year=${year}&month=${month}`);
+
+  return data;
+};
+
 export {
   createPost,
   getPost,
@@ -67,10 +85,13 @@ export {
   updatePost,
   updateFavoritePost,
   getFavoritePosts,
+  getCalendarPosts,
 };
 export type {
   ResponsePost,
   RequestCreatePost,
   ResponseSinglePost,
   RequestUpdatePost,
+  CalendarPost,
+  ResponseCalendarPost,
 };

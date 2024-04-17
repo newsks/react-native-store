@@ -6,21 +6,26 @@ import DayOfWeeks from './DayOfWeeks';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {MonthYear, isSameAsCurrentDate} from '@/utils';
 import DateBox from './DateBox';
+import {ResponseCalendarPost} from '@/api';
 
-interface CalendarProps {
+interface CalendarProps<T> {
   monthYear: MonthYear;
   selectedDate: number;
+  schedules: Record<number, T>;
   onPressDate: (date: number) => void;
   onChangeMonth: (increment: number) => void;
 }
 
-function Calendar({
+function Calendar<T>({
   monthYear,
   selectedDate,
+  schedules,
   onChangeMonth,
   onPressDate,
-}: CalendarProps) {
+}: CalendarProps<T>) {
   const {month, year, lastDate, firstDOW} = monthYear;
+
+  console.log('schedules', schedules);
   return (
     <>
       <View style={styles.headerContainer}>
@@ -56,6 +61,7 @@ function Calendar({
             <DateBox
               date={item.date}
               isToday={isSameAsCurrentDate(year, month, item.date)}
+              hasSchedule={Boolean(schedules[item.date])}
               selectedDate={selectedDate}
               onPressDate={onPressDate}
             />
