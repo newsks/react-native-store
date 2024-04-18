@@ -4,6 +4,9 @@ const numbers = {
     longitudeDelta: 0.0421,
     latitudeDelta: 0.0922,
   },
+  MIN_CALENDAR_YEAR: 2017,
+  MAX_CALENDAR_YEAR: 2030,
+  CALENDAR_YEAR_SELECTOR_COLUMN: 4,
 } as const;
 
 export {numbers};
